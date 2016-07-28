@@ -8,6 +8,9 @@ call vundle#rc()
 " required!
 Bundle 'gmarik/vundle'
 
+" Theme
+Bundle 'jpo/vim-railscasts-theme'
+
 " Nerdtree
 Bundle 'scrooloose/nerdtree'
 Bundle 'Xuyuanp/nerdtree-git-plugin'
@@ -23,11 +26,15 @@ Bundle 'tpope/vim-rails'
 " Status Style
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'tpope/vim-fugitive'
 
 " Tool
 Bundle 'easymotion/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 
+" Theme
+colorscheme railscasts
+set guifont=Monaco:h13
 
 " Tab
 set tabstop=2
@@ -39,27 +46,39 @@ set smarttab
 set nobackup
 set nowritebackup
 
-" Style
-colorscheme desert
-set guifont=Monaco:h12
-
 syntax on
 set number
 set autoindent
+set smartindent
 set ruler
 set history=50
 set incsearch
 set wildmenu
 set autoread
+set noswapfile
+set whichwrap=b,s,h,l,<,>,[,]
+set nowrap
 
 "Status
 set laststatus=2
+set statusline+=fugitive#statusline()
+
+" Search
+set hlsearch
+set ignorecase
+set incsearch
 
 " NerdTree
+let g:nerdtree_tabs_open_on_gui_startup=0
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
-let NERDTreeAutoDeleteBuffer=1
+let NERDTreeKeepTreeInNewTab=1
 map <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
@@ -101,4 +120,14 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+
+" CtrlP
+let g:ctrlp_working_path_mode = 'ra'
+nnoremap <silent> <D-t> :CtrlP<CR>
+nnoremap <silent> <D-r> :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$\|\.hg$\|\.svn$',
+  \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
+let s:ctrlp_fallback = 'ack %s --nocolor -f'
 
