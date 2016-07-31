@@ -1,4 +1,3 @@
-"git clone http://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 set nocompatible               " be iMproved
 filetype plugin indent on    " required
 
@@ -8,9 +7,6 @@ call vundle#rc()
 "let Vundle manage Vundle
 " required!
 Bundle 'gmarik/vundle'
-
-" Theme
-Bundle 'jpo/vim-railscasts-theme'
 
 " Nerdtree
 Bundle 'scrooloose/nerdtree'
@@ -34,8 +30,8 @@ Bundle 'easymotion/vim-easymotion'
 Bundle 'tomtom/tcomment_vim'
 
 " Theme
-colorscheme railscasts
-set guifont=Monaco:h13
+colorscheme desert
+
 
 " Tab
 set tabstop=2
@@ -60,7 +56,11 @@ set noswapfile
 set whichwrap=b,s,h,l,<,>,[,]
 set nowrap
 
-"Status
+" List
+set list
+set listchars=tab:›\ ,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+
+" Status
 set laststatus=2
 set statusline+=fugitive#statusline()
 
